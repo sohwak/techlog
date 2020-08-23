@@ -1,0 +1,786 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>k.live EN 생성</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f69c61e5-15bb-49dd-9901-15ab45f06e39" class="page sans"><header><h1 class="page-title"><a href="http://klaytn.live">k.li</a>ve EN 생성</h1></header><div class="page-body"><p id="fa1a22fd-9341-44dd-a011-c8a49ff5906b" class="">이제 Klaytn Endpoint Node를 살펴보자. 시스템 요구사항은 <a href="https://ko.docs.klaytn.com/node/endpoint-node/system-requirements">클레이튼 포럼</a>에서 확인이 가능하다.</p><blockquote id="09342569-f257-49b9-bf60-8f57817bdfae" class=""></blockquote><p id="10b90641-d00e-4e51-acf2-263303ee806a" class="">
+</p><p id="c587f6b6-fc6b-43c1-bc6c-9b803fcd2361" class="">
+</p><p id="964f5126-5a61-485c-84cd-464c8bf70398" class="">GCP에서 비슷한 건</p><p id="93a1915a-7327-4863-9b8d-cbbf349acd4c" class="">
+</p><figure id="647cb78e-ba72-453c-8e15-f7e18c2341f0" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled.png"><img style="width:1516px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled.png"/></a></figure><p id="a3978da1-553d-41f7-afb3-642ebc43c53c" class="">월 $251</p><p id="afb39ecd-1b46-4053-b939-93ba58b99ab3" class="">
+</p><p id="d3b5550e-0e2a-485f-9908-fd88dcb1bd39" class="">용량은</p><p id="53bdee97-9db1-45d7-bbf4-f0413f285a0a" class=""><a href="https://forum.klaytn.com/t/endpoint-node/82/7">https://forum.klaytn.com/t/endpoint-node/82/7</a></p><blockquote id="7095ded0-e06e-4dfb-8371-ba3694ba1ce7" class="">해당 링크에서 제일 위에 있는 것이 가장 최신의 chaindata입니다. 최신으로 사용하시면 되겠습니다.
+현재 cypress의 chaindata 증가속도는 2.5GB/Day보다는 많이 낮습니다. 그러므로 1TB로 현재는 충분하며 Cypress chaindata의 용량 증가에 따라 더 늘리시면 되겠습니다.
+Baobab의 경우는 50GB정도로 적습니다. (함께사용한다고 하면 Baobab chaindata 용량만큼만 추가로 필요합니다.)
+함께 사용한다면 1TB 충분해보입니다만 chaindata를 받아 압축을 풀고한다면 2TB정도는 필요하겠습니다. 압축푼뒤에 비용이 고려한다면 낮춰도 되겠습니다.</blockquote><blockquote id="021b574f-f6c4-4ca9-8d54-92f85e86d34c" class="">현재 chain data의 증가속도는 그보다 훨씬드리지만 말씀하신 데이터 증가이슈가 있습니다.
+그래서 조만간에 배포할 v1.5.0에는 state migration 기능을 추가하여
+현재 Cypress 800GB를 최신 데이터만 migration하여 200GB로 줄이는 기능을 추가할 예정입니다.
+최신 state만 필요한경우 해당 기능을 통해 chain data 용량을 줄이거나 저희가 migration한 chaindata를 공개하면 해당 chain data로 변경하시면 되겠습니다.
+해당 신규기능 릴리즈시 forum과 github등을 통해 공유드리겠습니다.</blockquote><p id="ab4054ae-ac7f-4a7b-9422-f4242e5faf53" class="">
+</p><p id="b3951d1a-446f-469d-aaea-339b4c84076d" class="">일단 2TB 필요</p><figure id="f70a9926-4f43-4312-9c4e-2e2f8b1275c1" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Capture_kbmini_2020-07-25_at_13.43.11.jpg"><img style="width:1506px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Capture_kbmini_2020-07-25_at_13.43.11.jpg"/></a></figure><p id="eb85acb9-c049-482b-9aed-8b26a077d519" class="">시간당 1천원씩... ㅠㅠ</p><p id="747d098f-ccb1-4e68-82f6-0afddb46f094" class="">운영은 할 수 있을까</p><p id="a47ac047-9288-4df7-9e3d-7cbdadf0ea28" class="">
+</p><p id="8d035874-5ab7-4e20-ae7a-c5c43ac6805f" class="">타협해서 SSD → HHD로 변경</p><figure id="7582c9d8-d508-4034-a14f-2c6ecd29efe9" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Capture_kbmini_2020-07-25_at_13.45.38.jpg"><img style="width:1516px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Capture_kbmini_2020-07-25_at_13.45.38.jpg"/></a></figure><p id="815b0cf4-4d37-4155-8ada-ebf16148051d" class="">
+</p><p id="9ecde46d-c269-4e8d-932d-e7910c7e5885" class="">음... 안쓸땐 꺼놔야겠다... 일단 생성 ㅠㅠ</p><p id="c7387231-956b-49be-9041-08e99c5c94c2" class="">
+</p><p id="81c6368d-c71d-47c5-9273-394a369f7384" class="">
+</p><pre id="7418df79-c4c9-4177-9049-015b61a79516" class="code"><code>wget http://packages.klaytn.net/klaytn/v1.5.0/ken-v1.5.0-0-linux-amd64.tar.gz
+
+tar -xvpf ken-v1.5.0-0-linux-amd64.tar.gz
+
+cat &gt;&gt; ~/.profile 
+export PATH=$PATH:~/ken-linux-amd64/bin
+</code></pre><p id="432b0a05-96a3-42af-a02b-9812331ac4b8" class="">
+</p><p id="5f78ea09-c290-4c7e-9f03-d511ab2a5230" class=""><a href="https://ko.docs.klaytn.com/node/endpoint-node/installation-guide/configuration">https://ko.docs.klaytn.com/node/endpoint-node/installation-guide/configuration</a></p><pre id="ee19db9a-5a77-4960-a769-5eb4938c6f8c" class="code"><code>sudo mkdir -p /var/kend/data</code></pre><p id="02345162-20b8-40c0-8c93-8acf6cac3487" class="">
+</p><pre id="0f184f16-767f-4658-b61a-455b8df77255" class="code"><code>cd ~
+wget https://s3.ap-northeast-2.amazonaws.com/klaytn-chaindata/cypress/klaytn-cypress-chaindata-20200724010712.tar.gz
+
+# 대략 받는데... 2시간 반...
+klaytn-cypress-chaindata-20200724010712.tar.gz    6%[=====&gt;                                                                                                ]  51.94G   106MB/s    eta 2h 12m
+
+ubuntu@klayen:~$ ls -al
+total 829974468
+drwxr-xr-x 6 ubuntu ubuntu         4096 Jul 25 06:39 .
+drwxr-xr-x 4 root   root           4096 Jul 25 04:49 ..
+-rw------- 1 ubuntu ubuntu          350 Jul 25 06:35 .bash_history
+-rw-r--r-- 1 ubuntu ubuntu          220 Feb 25 12:03 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu         3771 Feb 25 12:03 .bashrc
+drwx------ 2 ubuntu ubuntu         4096 Jul 25 06:26 .cache
+drwx------ 5 ubuntu ubuntu         4096 Jul 25 06:35 .ken
+drwxrwxr-x 4 ubuntu ubuntu         4096 Jul  8 02:43 ken-linux-amd64
+-rw-rw-r-- 1 ubuntu ubuntu     19936685 Jul  8 02:48 ken-v1.5.0-0-linux-amd64.tar.gz
+-rw-rw-r-- 1 ubuntu ubuntu 849873785717 Jul 24 10:05 klaytn-cypress-chaindata-20200724010712.tar.gz
+-rw-r--r-- 1 ubuntu ubuntu         1095 Jul 25 06:37 .profile
+drwx------ 2 ubuntu ubuntu         4096 Jul 25 06:26 .ssh
+-rw-r--r-- 1 ubuntu ubuntu            0 Jul 25 06:29 .sudo_as_admin_successful
+-rw------- 1 ubuntu ubuntu         1895 Jul 25 06:39 .viminfo
+
+# 푸는데 3시간 이상 소요... -v 옵션이라도 뺄껄 그랬어
+tar -C /var/kend/data -xvf klaytn-cypress-chaindata-20200724010712.tar.gz
+</code></pre><p id="2aca602e-6d93-4486-a076-145e4355892b" class="">
+</p><p id="db315c2a-2e79-4d23-b20b-fe334902d484" class="">다 풀고 나서</p><pre id="43fa997c-242b-4ac5-995b-f6f519b61543" class="code"><code>ubuntu@klayen:~/ken-linux-amd64/conf$ df -k
+Filesystem      1K-blocks       Used Available Use% Mounted on
+/dev/root      2032312700 1793219340 239076976  89% /
+devtmpfs         16439448          0  16439448   0% /dev
+tmpfs            16443452          0  16443452   0% /dev/shm
+tmpfs             3288692        956   3287736   1% /run
+tmpfs                5120          0      5120   0% /run/lock
+tmpfs            16443452          0  16443452   0% /sys/fs/cgroup
+/dev/sda15         106858       3934    102924   4% /boot/efi
+/dev/loop0          30720      30720         0 100% /snap/snapd/8542
+/dev/loop1          56320      56320         0 100% /snap/core18/1880
+/dev/loop2          73088      73088         0 100% /snap/lxd/16100
+/dev/loop3         120832     120832         0 100% /snap/google-cloud-sdk/141
+tmpfs             3288688          0   3288688   0% /run/user/1000
+/dev/loop4         121472     121472         0 100% /snap/google-cloud-sdk/142</code></pre><p id="3f469a76-76c7-4894-b6bc-d14498f2005c" class="">
+</p><pre id="edc6af78-312f-4430-bc8b-1b446c4b033f" class="code"><code>kend start</code></pre><p id="2f6b82f0-a998-4edc-be82-8e8628637896" class="">
+</p><p id="81812446-08ae-44d4-bbde-f7f7832986e6" class="">근데 블럭을 잘 못받아온다...</p><p id="45131ecd-943d-4f69-9307-2a8b6f4608f6" class="">peer : 34103408 → 나 : 33959823 (차이 143585)</p><p id="df383f34-30eb-4402-bd95-4e3048f7eac4" class="">peer : 34105042 → 나 : 33960591 (차이 144451)</p><p id="4f90ea3a-7fe0-41e2-b5fd-a56ad61756e6" class="">어찌 블럭 생성속도보다 더 늦어 ㅠㅠㅠ 네트워크 차이인가</p><p id="81240dbf-b725-40bd-85ab-84bd1c09bb77" class="">34134863 - 33974960</p><p id="6886da71-86e9-4921-b15c-65f81c27f540" class="">
+</p><p id="2d5abf4e-42e6-4850-aa94-204d14f4361f" class="">speedtest-cli</p><pre id="2540b1d7-75ac-4101-992f-a358292f0c9f" class="code"><code>
+ubuntu@klayen:~$ speedtest-cli
+Retrieving speedtest.net configuration...
+Testing from Google Cloud (34.64.142.135)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by kdatacenter.com (Seoul) [2.55 km]: 5.121 ms
+Testing download speed................................................................................
+Download: 908.21 Mbit/s
+Testing upload speed......................................................................................................
+Upload: 567.20 Mbit/s</code></pre><p id="acada62d-9fce-4c69-8b96-14cc2142499c" class="">
+</p><p id="bb99b120-9f88-42a0-b548-edd460db17ee" class="">울집에서 하면 (500M 랜)</p><pre id="dd57a33c-4664-4aaf-8c0c-ae7bf8a9ae03" class="code"><code>kangbu@deskm2:~/sandbox/speedtest$ python3 speedtest.py
+Retrieving speedtest.net configuration...
+Testing from Lg Powercomm (49.172.198.226)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by kdatacenter.com (Seoul) [106.31 km]: 12.177 ms
+Testing download speed................................................................................
+Download: 421.40 Mbit/s
+Testing upload speed......................................................................................................
+Upload: 465.14 Mbit/s</code></pre><p id="6e6f672f-56da-4f7f-a48b-df292b6f153e" class="">
+</p><p id="47355b06-ed73-4c16-a89a-a83319dd86e2" class="">걍 GCP는 1 Gbps인가... 설정을 어디서 하는지 모르겠는데, 걍 dedicated 아니면 고정되어 있는듯 ㅠㅠ AWS로 가야하나...</p><p id="f28f24ef-8a4d-47a7-a3a6-c90032e19da5" class="">
+</p><p id="ea6b357d-3f99-40c1-a700-8a5a5d0f79b2" class="">자원 남아돌고 있음...</p><figure id="639ce3e7-4810-4919-adcb-2b17ef048cc0" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Capture_kbmini_2020-07-26_at_2.46.38.jpg"><img style="width:432px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Capture_kbmini_2020-07-26_at_2.46.38.jpg"/></a></figure><p id="824b9e7a-1b34-4f37-a0fc-516175e23516" class="">
+</p><p id="c53745f2-baca-4ee0-9aa6-85e00c5a4351" class="">로그가 처참...</p><pre id="933c4d90-a34b-467a-b686-9f276f2444c5" class="code"><code>INFO[07/25,17:35:23 Z] [5] Imported new chain segment                number=33960400 hash=58fd98…f4924a blocks=11 txs=19 elapsed=13.358s   trieDBSize=2.12mB   mgas=8.461  mgasps=0.633
+INFO[07/25,17:35:34 Z] [5] Imported new chain segment                number=33960415 hash=8c48bd…2203ca blocks=15 txs=23 elapsed=10.478s   trieDBSize=2.45mB   mgas=3.047  mgasps=0.291
+INFO[07/25,17:35:52 Z] [5] Imported new chain segment                number=33960424 hash=16ba7d…ac1774 blocks=9  txs=28 elapsed=18.787s   trieDBSize=2.86mB   mgas=3.518  mgasps=0.187
+INFO[07/25,17:36:05 Z] [5] Imported new chain segment                number=33960434 hash=e16ba7…53c220 blocks=10 txs=17 elapsed=12.811s   trieDBSize=3.08mB   mgas=2.216  mgasps=0.173
+INFO[07/25,17:36:15 Z] [5] Imported new chain segment                number=33960443 hash=d327bd…8334f0 blocks=9  txs=19 elapsed=10.187s   trieDBSize=3.36mB   mgas=5.707  mgasps=0.560
+INFO[07/25,17:36:20 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:36:20 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:36:22 Z] [47] Persisted trie from memory database       blockNum=33960448 updated nodes=7151  updated nodes size=2.82mB time=66.591754ms  gcnodes=8559  gcsize=3.72mB gctime=38.265936ms livenodes=243 livesize=112.42kB
+INFO[07/25,17:36:32 Z] [5] Imported new chain segment                number=33960450 hash=881729…907cdd blocks=7  txs=11 elapsed=16.694s   trieDBSize=290.47kB mgas=4.466  mgasps=0.268
+INFO[07/25,17:36:42 Z] [5] Imported new chain segment                number=33960464 hash=5a305c…e04fde blocks=14 txs=30 elapsed=10.060s   trieDBSize=671.94kB mgas=6.441  mgasps=0.640
+INFO[07/25,17:36:52 Z] [5] Imported new chain segment                number=33960475 hash=5e7784…e5059c blocks=11 txs=21 elapsed=10.093s   trieDBSize=1.02mB   mgas=2.493  mgasps=0.247
+INFO[07/25,17:37:03 Z] [5] Imported new chain segment                number=33960483 hash=3c6ccd…cc8944 blocks=8  txs=19 elapsed=10.577s   trieDBSize=1.34mB   mgas=2.657  mgasps=0.251
+INFO[07/25,17:37:14 Z] [5] Imported new chain segment                number=33960493 hash=753785…e52fb6 blocks=10 txs=23 elapsed=10.796s   trieDBSize=1.57mB   mgas=3.443  mgasps=0.319
+INFO[07/25,17:37:20 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:37:20 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:38:20 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:38:20 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:38:28 Z] [5] Imported new chain segment                number=33960498 hash=d99d3f…d2c0e2 blocks=5  txs=9  elapsed=1m14.755s trieDBSize=1.73mB   mgas=4.180  mgasps=0.056
+INFO[07/25,17:38:39 Z] [5] Imported new chain segment                number=33960512 hash=d4981a…c275f1 blocks=14 txs=24 elapsed=10.795s   trieDBSize=1.94mB   mgas=5.911  mgasps=0.548
+INFO[07/25,17:38:50 Z] [5] Imported new chain segment                number=33960525 hash=e27caa…17517f blocks=13 txs=32 elapsed=10.702s   trieDBSize=2.22mB   mgas=9.648  mgasps=0.901
+INFO[07/25,17:39:00 Z] [5] Imported new chain segment                number=33960537 hash=eac5c7…900295 blocks=12 txs=26 elapsed=10.009s   trieDBSize=2.45mB   mgas=8.554  mgasps=0.855
+INFO[07/25,17:39:12 Z] [5] Imported new chain segment                number=33960548 hash=17db88…ac09be blocks=11 txs=21 elapsed=12.485s   trieDBSize=2.80mB   mgas=8.437  mgasps=0.676
+INFO[07/25,17:39:20 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:39:20 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:39:23 Z] [5] Imported new chain segment                number=33960557 hash=eabfba…cf5b54 blocks=9  txs=27 elapsed=10.680s   trieDBSize=2.97mB   mgas=6.555  mgasps=0.614
+INFO[07/25,17:39:40 Z] [5] Imported new chain segment                number=33960567 hash=b57d73…4196bd blocks=10 txs=30 elapsed=16.545s   trieDBSize=3.42mB   mgas=9.598  mgasps=0.580
+INFO[07/25,17:40:25 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:40:25 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:40:57 Z] [5] Imported new chain segment                number=33960571 hash=6ec2e3…1b3992 blocks=4  txs=5  elapsed=1m17.195s trieDBSize=3.41mB   mgas=6.181  mgasps=0.080
+INFO[07/25,17:41:30 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:41:30 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:42:18 Z] [5] Imported new chain segment                number=33960574 hash=55522a…ab900c blocks=3  txs=11 elapsed=1m20.931s trieDBSize=3.51mB   mgas=4.506  mgasps=0.056
+INFO[07/25,17:42:18 Z] [47] Persisted trie from memory database       blockNum=33960576 updated nodes=7471  updated nodes size=2.88mB time=70.8424ms    gcnodes=8433  gcsize=3.68mB gctime=36.045803ms livenodes=338 livesize=151.45kB
+INFO[07/25,17:42:30 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:42:30 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:42:30 Z] [5] Imported new chain segment                number=33960591 hash=206061…1622d9 blocks=17 txs=33 elapsed=12.011s   trieDBSize=660.46kB mgas=6.914  mgasps=0.576
+INFO[07/25,17:43:30 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:43:30 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:43:41 Z] [5] Imported new chain segment                number=33960592 hash=c7ec4c…9b4b82 blocks=1  txs=2  elapsed=1m11.000s trieDBSize=645.53kB mgas=3.022  mgasps=0.043
+INFO[07/25,17:43:51 Z] [5] Imported new chain segment                number=33960610 hash=9b4a85…84c295 blocks=18 txs=43 elapsed=10.370s   trieDBSize=966.90kB mgas=7.992  mgasps=0.771
+INFO[07/25,17:44:01 Z] [5] Imported new chain segment                number=33960615 hash=3b9ebb…2d7f96 blocks=5  txs=18 elapsed=10.020s   trieDBSize=1.23mB   mgas=4.968  mgasps=0.496
+INFO[07/25,17:44:11 Z] [5] Imported new chain segment                number=33960622 hash=51f55a…ef5c74 blocks=7  txs=20 elapsed=10.071s   trieDBSize=1.47mB   mgas=2.378  mgasps=0.236
+INFO[07/25,17:44:22 Z] [5] Imported new chain segment                number=33960627 hash=e04737…d191e6 blocks=5  txs=16 elapsed=10.645s   trieDBSize=1.84mB   mgas=2.198  mgasps=0.206
+INFO[07/25,17:44:32 Z] [5] Imported new chain segment                number=33960636 hash=1d69be…0cff01 blocks=9  txs=20 elapsed=10.198s   trieDBSize=2.08mB   mgas=2.647  mgasps=0.260
+INFO[07/25,17:44:35 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:44:35 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:44:43 Z] [5] Imported new chain segment                number=33960650 hash=3d355d…3d446e blocks=14 txs=33 elapsed=10.865s   trieDBSize=2.29mB   mgas=7.128  mgasps=0.656
+INFO[07/25,17:44:58 Z] [5] Imported new chain segment                number=33960663 hash=746135…ee05bd blocks=13 txs=25 elapsed=15.575s   trieDBSize=2.60mB   mgas=8.735  mgasps=0.561
+INFO[07/25,17:45:08 Z] [5] Imported new chain segment                number=33960673 hash=d6df78…a86a0f blocks=10 txs=20 elapsed=10.028s   trieDBSize=2.80mB   mgas=8.446  mgasps=0.842
+INFO[07/25,17:45:36 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:45:36 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:46:26 Z] [5] Imported new chain segment                number=33960681 hash=ea4f68…0b8b2e blocks=8  txs=19 elapsed=1m17.985s trieDBSize=2.99mB   mgas=8.078  mgasps=0.104
+INFO[07/25,17:46:37 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:46:37 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:46:39 Z] [5] Imported new chain segment                number=33960689 hash=2cc009…60573c blocks=8  txs=19 elapsed=12.402s   trieDBSize=3.26mB   mgas=2.370  mgasps=0.191
+INFO[07/25,17:46:47 Z] [47] Persisted trie from memory database       blockNum=33960704 updated nodes=7377  updated nodes size=2.89mB time=72.008061ms  gcnodes=8398  gcsize=3.60mB gctime=40.472911ms livenodes=314 livesize=133.23kB
+INFO[07/25,17:46:50 Z] [5] Imported new chain segment                number=33960707 hash=914023…ccffdb blocks=18 txs=32 elapsed=10.913s   trieDBSize=214.31kB mgas=13.176 mgasps=1.207
+INFO[07/25,17:46:52 Z] [33] [Dial] Try to update dial candidate with a multichannel peer  id=301c8d7d8f3b0352 addr=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:47:01 Z] [5] Imported new chain segment                number=33960715 hash=beac1a…5aede4 blocks=8  txs=16 elapsed=11.314s   trieDBSize=560.95kB mgas=4.841  mgasps=0.428
+INFO[07/25,17:47:15 Z] [5] Imported new chain segment                number=33960720 hash=551e0e…a27f07 blocks=5  txs=11 elapsed=14.311s   trieDBSize=842.04kB mgas=1.244  mgasps=0.087
+INFO[07/25,17:47:22 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;
+INFO[07/25,17:47:27 Z] [5] Imported new chain segment                number=33960735 hash=0057c3…92ff16 blocks=15 txs=27 elapsed=11.353s   trieDBSize=1.26mB   mgas=8.861  mgasps=0.781
+INFO[07/25,17:47:37 Z] [33] [Dial] Add dial candidate from static nodes  id=c378208d4d09e95a NodeType=3 ip=49.50.167.22  port=&quot;[32323 32324]&quot;
+INFO[07/25,17:48:07 Z] [33] [Dial] Add dial candidate from static nodes  id=301c8d7d8f3b0352 NodeType=3 ip=27.96.131.182 port=&quot;[32323 32324]&quot;</code></pre><p id="37d4c786-262e-4937-af10-f8cff6101f90" class="">
+</p><p id="a11a64a3-d780-4ffe-a246-246d78bd4ef0" class="">일단 하루만 더 놔둬보고... ㅠㅠ</p><p id="e6cae9e5-7b5f-4baa-85e4-892b0604b016" class="">
+</p><p id="1243c558-6724-43c4-ab1c-6d6772c09a4a" class="">아니 근데... 네트워크 문제라면 네트워크가 100% (100 MB) 쳐야 하는데 그것도 아니자나. 1일 기준으로 보면 기존 데이터 다운 받을때가 최대 100MB 정도로 나온거 말고는... 현재 네트워크 패킷은 그냥 사망수준... ㅠㅠ 어찌된거얌</p><p id="2359949e-2738-44a7-b967-2e0e0caf4a12" class="">
+</p><p id="719d6131-9f8e-4e0f-9203-5b16d384439e" class="">
+</p><div id="253410d9-2ec6-4247-a9a5-9669f18697bd" class="column-list"><div id="08d65864-4fb7-47b3-873f-c7cd1ddc371e" style="width:33.333333333333336%" class="column"><figure id="6c3cca62-d451-4f1d-932f-9bac0b756a68" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled%201.png"><img style="width:480px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled%201.png"/></a></figure><p id="38710d69-4172-4d2b-95b6-0a840c3a87c4" class="">
+</p></div><div id="a4c6eed0-c723-48f6-8182-f0c16876d5ab" style="width:33.33333333333333%" class="column"><figure id="93896f3c-4432-4650-9939-1aba135b1a86" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled%202.png"><img style="width:480px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled%202.png"/></a></figure></div><div id="be1f5101-cd11-4f85-9079-59b0930bd82b" style="width:33.333333333333336%" class="column"><figure id="9a691bee-a250-4fab-a249-a3ad30b3fdd1" class="image"><a href="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled%203.png"><img style="width:480px" src="k%20live%20EN%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20647cb78eba72453c8e15f7e18c2341f0/Untitled%203.png"/></a></figure></div></div><p id="185d3e8b-b9a7-46d3-a22f-b3bfe537361f" class="">
+</p></div></article></body></html>
